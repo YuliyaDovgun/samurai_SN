@@ -1,8 +1,8 @@
 import React from "react";
-import "./Navbar.css"
+import s from "./Navbar.module.css"
 
 export function Navbar() {
-    return <div className={'Navbar'}>
+    return <div className={s.Navbar}>
         <nav>
             <div><a href={'Profile'}>Profile</a></div>
             <div><a href={'Messages'}>Messages</a></div>
