@@ -1,0 +1,39 @@
+.Post {
+    width: 60%;
+    min-height: 50px;
+    margin: 5px;
+    border-radius: 50px;
+    background-color: white;
+    display: grid;
+    grid-template-areas:
+            "img post";
+    grid-template-columns: 40px 10fr;
+}
+
+.Post img {
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+}
+
+.post {
+    display: grid;
+    grid-template-areas:
+            "message"
+            "likes";
+    grid-template-rows: 1fr 1fr;
+    grid-area: post;
+    margin-left: 10px;
+}
+
+.postImg {
+    grid-area: img;
+}
+
+.postMessage {
+    grid-area: message;
+}
+
+.postLikes {
+    grid-area: likes;
+}

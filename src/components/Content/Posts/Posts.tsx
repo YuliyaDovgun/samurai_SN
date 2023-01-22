@@ -1,4 +1,5 @@
 import React from "react";
+import {Post} from "./Post/Post";
 
 export function Posts() {
     return <div>
@@ -6,8 +7,8 @@ export function Posts() {
             <textarea placeholder={'Send your messages'}/>
             <button>Send</button>
         </div>
-        <div>
-            Posts
-        </div>
+        <Post/>
+        <Post/>
+        <Post/>
     </div>
 }
