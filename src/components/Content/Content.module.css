@@ -2,6 +2,7 @@
     grid-area: content;
     background-color: salmon;
     padding: 10px;
+    height: 100vh;
 }
 
 .Content img {
@@ -14,6 +15,7 @@
     width: 100%;
     height: 80px;
 }
+
 .Content button {
     float: right;
 }
