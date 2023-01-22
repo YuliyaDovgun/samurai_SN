@@ -1,0 +1,6 @@
+.Navbar {
+  grid-area: nav;
+  background-color: papayawhip;
+  margin-right: 10px;
+  padding: 10px;
+}

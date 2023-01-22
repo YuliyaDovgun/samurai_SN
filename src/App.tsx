@@ -1,14 +1,19 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./Header";
-import {Technologies} from "./Technologies";
+import {Content} from "./Content/Content";
+import {Header} from "./Header/Header";
+import {Navbar} from "./Navbar/Navbar";
 
 function App() {
     return (
-        <div className="App">
-            <Header/>
-            <Technologies/>
+        <div className={'App'}>
+           <div className={'common'}>
+               <Header/>
+               <Navbar/>
+               <Content/>
+           </div>
         </div>
     );
 }
+
 export default App;
