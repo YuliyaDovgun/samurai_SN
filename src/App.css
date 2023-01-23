@@ -11,3 +11,9 @@
     grid-template-columns: 3fr 9fr;
     grid-template-rows: 60px 10fr;
 }
+.content {
+    grid-area: content;
+    background-color: salmon;
+    padding: 10px;
+    height: 100vh;
+}

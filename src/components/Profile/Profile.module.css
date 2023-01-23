@@ -1,0 +1,14 @@
+.Profile img {
+    width: 100px;
+    height: 100px;
+}
+
+.Profile textarea {
+    background-color: #E6EEEA;
+    width: 100%;
+    height: 80px;
+}
+
+.Profile button {
+    float: right;
+}
