@@ -5,7 +5,7 @@ import s from "./Navbar.module.css"
 export function Navbar() {
     return <div className={s.Navbar}>
         <nav>
-            <div><NavLink to={'/profile'}>Profile</NavLink></div>
+            <div><NavLink to={'/'}>Profile</NavLink></div>
             <div><NavLink to={'/dialogs'}>Messages</NavLink></div>
             <div><NavLink to={'/news'}>News</NavLink></div>
             <div><NavLink to={'/music'}>Music</NavLink></div>
