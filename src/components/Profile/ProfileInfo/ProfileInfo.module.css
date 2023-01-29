@@ -1,0 +1,24 @@
+.ProfileInfo {
+    display: grid;
+    grid-template-areas:
+            "img name"
+            "img description";
+    grid-template-columns: 100px 50%;
+    grid-gap: 10px;
+    margin: 10px 10px 10px 0;
+}
+
+.ProfileInfo img {
+    grid-area: img;
+    width: 100px;
+    height: 100px;
+}
+
+.profileName {
+    grid-area: name;
+}
+
+.profileDescription {
+    grid-area: description
+}
+
