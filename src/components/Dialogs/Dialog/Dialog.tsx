@@ -1,11 +1,13 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import s from "./Dialog.module.css"
+import {userNameType} from "../Dialogs";
 
 type DialogPropsType = {
-    userNames: Array<string>
+    usersNames: Array<userNameType>
 }
 
 export function Dialog(props: DialogPropsType) {
-    return <div className={s.Dialog}>{props.userNames.map(u => <div><NavLink to={`/${u}`}>{u}</NavLink></div>)}</div>
+    return <div className={s.Dialog}>{props.usersNames.map(u => <
+        div><NavLink to={`/dialogs/${u.id}`}>{u.name}</NavLink></div>)}</div>
 }
