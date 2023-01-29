@@ -1,0 +1,14 @@
+.Dialog {
+    grid-area: dialog;
+    background-color: papayawhip;
+    margin: 10px 0;
+    padding: 10px;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    color: white;
+}
+
