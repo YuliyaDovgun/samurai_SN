@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Message.module.css'
-import {messagesType} from "../Dialogs";
+import {messagesType} from "../../../index";
 
 type MessagePropsType = {
     messages: messagesType[]
