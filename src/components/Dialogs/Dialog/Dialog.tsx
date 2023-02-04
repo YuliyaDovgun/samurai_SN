@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./Dialog.module.css"
-import {userNameType} from "../../../index";
+import {userNameType} from "../../../redux/state";
 
 type DialogPropsType = {
     usersNames: Array<userNameType>

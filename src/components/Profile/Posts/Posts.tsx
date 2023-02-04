@@ -1,6 +1,6 @@
 import React from "react";
 import {Post} from "./Post/Post";
-import {postsType} from "../../../index";
+import {postsType} from "../../../redux/state";
 
 type PostsPropsType = {
     posts: postsType[]

@@ -2,17 +2,16 @@ import React from "react"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
 import s from "./Dialogs.module.css"
-import {messagesType, userNameType} from "../../index";
+import {messagesPageType} from "../../redux/state";
 
 type DialogsPropsType = {
-    users: userNameType[]
-    messages: messagesType[]
+    messagesPage: messagesPageType
 }
 export function Dialogs(props: DialogsPropsType) {
 
     return <div className={s.Dialogs}>
-        <Dialog usersNames={props.users}/>
-        <Message messages={props.messages}/>
+        <Dialog usersNames={props.messagesPage.usersNames}/>
+        <Message messages={props.messagesPage.messages}/>
     </div>
 }
 
