@@ -10,6 +10,7 @@ import {dataType} from "./redux/state";
 type AppPropsType = {
     state: dataType
     addPost: (postText: string | undefined) => void
+    setPostText: (postText: string) => void
 }
 function App(props: AppPropsType) {
     return (
@@ -20,7 +21,10 @@ function App(props: AppPropsType) {
                     <Navbar/>
                     <div className={'content'}>
                         <Switch>
-                            <Route exact path={'/'} render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost}/>}/>
+                            <Route exact path={'/'} render={() => <Profile profilePage={props.state.profilePage}
+                                                                           addPost={props.addPost}
+                                                                           setPostText={props.setPostText}
+                            />}/>
                             <Route path={'/dialogs'} render={() => <Dialogs messagesPage={props.state.messagesPage}/>}/>
                             <Route render={() => <NotFound/>}/>
                         </Switch>
