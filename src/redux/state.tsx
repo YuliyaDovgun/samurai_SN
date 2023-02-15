@@ -19,6 +19,7 @@ export type profilePageType = {
 }
 export type messagesPageType = {
     usersNames: userNameType[]
+    messageText: string
     messages: messagesType[]
 }
 export type dataType = {
@@ -41,6 +42,7 @@ const state: dataType = {
             {name: 'Vika', id: '3'},
             {name: 'Natasha', id: '4'},
         ],
+        messageText: '',
         messages: [
             {id: 1, message: 'Hello!'},
             {id: 2, message: 'How are you'},
@@ -54,8 +56,17 @@ export const addPost = (postText: string | undefined) => {
     state.profilePage.postText = ''
     rerenderEntireTree(state)
 }
+export const addMessage = (messageText: string | undefined) => {
+    state.messagesPage.messages.push({id: 4, message: messageText})
+    state.messagesPage.messageText = ''
+    rerenderEntireTree(state)
+}
 export const setPostText = (postText: string) => {
     state.profilePage.postText = postText
+    rerenderEntireTree(state)
+}
+export const setMessageText = (messageText: string) => {
+    state.messagesPage.messageText = messageText
     rerenderEntireTree(state)
 }
 export default state

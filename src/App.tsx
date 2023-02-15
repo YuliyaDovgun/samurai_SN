@@ -11,6 +11,8 @@ type AppPropsType = {
     state: dataType
     addPost: (postText: string | undefined) => void
     setPostText: (postText: string) => void
+    setMessageText: (messageText: string) => void
+    addMessage: (messageText: string) => void
 }
 function App(props: AppPropsType) {
     return (
@@ -25,7 +27,10 @@ function App(props: AppPropsType) {
                                                                            addPost={props.addPost}
                                                                            setPostText={props.setPostText}
                             />}/>
-                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={props.state.messagesPage}/>}/>
+                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={props.state.messagesPage}
+                                                                            addMessage={props.addMessage}
+                                                                            setMessageText={props.setMessageText}
+                            />}/>
                             <Route render={() => <NotFound/>}/>
                         </Switch>
                     </div>

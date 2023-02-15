@@ -6,12 +6,14 @@ import {messagesPageType} from "../../redux/state";
 
 type DialogsPropsType = {
     messagesPage: messagesPageType
+    setMessageText: (messageText: string) => void
+    addMessage: (messageText: string) => void
 }
 export function Dialogs(props: DialogsPropsType) {
 
     return <div className={s.Dialogs}>
         <Dialog usersNames={props.messagesPage.usersNames}/>
-        <Message messages={props.messagesPage.messages}/>
+        <Message messagesPage={props.messagesPage} addMessage={props.addMessage} setMessageText={props.setMessageText}/>
     </div>
 }
 
