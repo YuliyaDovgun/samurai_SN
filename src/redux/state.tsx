@@ -1,4 +1,4 @@
-import {rerenderEntireTree} from "../render";
+ let rerenderEntireTree = (state: dataType) => { console.log(state)}
 
 export type postsType = {
     id: number
@@ -68,5 +68,8 @@ export const setPostText = (postText: string) => {
 export const setMessageText = (messageText: string) => {
     state.messagesPage.messageText = messageText
     rerenderEntireTree(state)
+}
+export const subscriber = (observer: (state: dataType) => void) => {
+    rerenderEntireTree = observer
 }
 export default state
