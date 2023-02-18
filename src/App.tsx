@@ -5,16 +5,13 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import {dataType} from "./redux/state";
+import {storeType} from "./redux/state";
 
 type AppPropsType = {
-    state: dataType
-    addPost: (postText: string | undefined) => void
-    setPostText: (postText: string) => void
-    setMessageText: (messageText: string) => void
-    addMessage: (messageText: string) => void
+    store: storeType
 }
 function App(props: AppPropsType) {
+    const state = props.store.getState()
     return (
         <BrowserRouter>
             <div className={'App'}>
@@ -23,13 +20,13 @@ function App(props: AppPropsType) {
                     <Navbar/>
                     <div className={'content'}>
                         <Switch>
-                            <Route exact path={'/'} render={() => <Profile profilePage={props.state.profilePage}
-                                                                           addPost={props.addPost}
-                                                                           setPostText={props.setPostText}
+                            <Route exact path={'/'} render={() => <Profile profilePage={state.profilePage}
+                                                                           addPost={props.store.addPost.bind(props.store)}
+                                                                           setPostText={props.store.setPostText.bind(props.store)}
                             />}/>
-                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={props.state.messagesPage}
-                                                                            addMessage={props.addMessage}
-                                                                            setMessageText={props.setMessageText}
+                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={state.messagesPage}
+                                                                            addMessage={props.store.addMessage.bind(props.store)}
+                                                                            setMessageText={props.store.setMessageText.bind(props.store)}
                             />}/>
                             <Route render={() => <NotFound/>}/>
                         </Switch>
