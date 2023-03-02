@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import s from './Message.module.css'
-import {actionType, messagesPageType} from "../../../redux/state";
+import {actionType, addMessageAC, messagesPageType, setMessageAC} from "../../../redux/state";
 
 type MessagePropsType = {
     messagesPage: messagesPageType
@@ -12,10 +12,10 @@ export function Message(props: MessagePropsType) {
     const messages = props.messagesPage.messages.map(m => <div key={m.id}>{m.message}</div>)
 
     const onChangeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: 'SET_MESSAGE-TEXT', text: e.currentTarget.value})
+        props.dispatch(setMessageAC(e.currentTarget.value))
     }
     const onClickHandler = () => {
-        props.dispatch({type: 'ADD-MESSAGE', text: props.messagesPage.messageText})
+        props.dispatch(addMessageAC(props.messagesPage.messageText))
     }
     return <div>
         <div>

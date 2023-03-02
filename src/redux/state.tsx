@@ -1,6 +1,10 @@
 /*let rerenderEntireTree = (state: dataType) => {
     console.log(state)
 }*/
+const ADD_POST = 'ADD-POST'
+const SET_POST_TEXT = 'SET-POST-TEXT'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const SET_MESSAGE_TEXT = 'SET_MESSAGE-TEXT'
 
 export type postsType = {
     id: number
@@ -82,20 +86,20 @@ const store: storeType = {
         this.rerenderEntireTree = observer
     },
     dispatch(action: actionType) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             this._state.profilePage.posts.push({id: 4, message: action.text, likesCount: 0})
             this._state.profilePage.postText = ''
             this.rerenderEntireTree(this._state)
-        } else if (action.type === 'ADD-MESSAGE') {
+        } else if (action.type === ADD_MESSAGE) {
             this._state.messagesPage.messages.push({id: 4, message: action.text})
             this._state.messagesPage.messageText = ''
             this.rerenderEntireTree(this._state)
-        } else if (action.type === 'SET-POST-TEXT') {
+        } else if (action.type === SET_POST_TEXT) {
             if (action.text) {
                 this._state.profilePage.postText = action.text
                 this.rerenderEntireTree(this._state)
             }
-        } else if (action.type === 'SET_MESSAGE-TEXT') {
+        } else if (action.type === SET_MESSAGE_TEXT) {
             if (action.text) {
                 this._state.messagesPage.messageText = action.text
                 this.rerenderEntireTree(this._state)
@@ -103,4 +107,9 @@ const store: storeType = {
         }
     }
 }
+export const addPostAC = (text: string) => ({type: ADD_POST, text})
+export const setPostAC = (text: string) => ({type: SET_POST_TEXT, text})
+export const addMessageAC = (text: string) => ({type: ADD_MESSAGE, text})
+export const setMessageAC = (text: string) => ({type: SET_MESSAGE_TEXT, text})
+
 export default store
