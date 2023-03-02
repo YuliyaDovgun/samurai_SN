@@ -21,12 +21,10 @@ function App(props: AppPropsType) {
                     <div className={'content'}>
                         <Switch>
                             <Route exact path={'/'} render={() => <Profile profilePage={state.profilePage}
-                                                                           addPost={props.store.addPost.bind(props.store)}
-                                                                           setPostText={props.store.setPostText.bind(props.store)}
+                                                                           dispatch={props.store.dispatch.bind(props.store)}
                             />}/>
                             <Route path={'/dialogs'} render={() => <Dialogs messagesPage={state.messagesPage}
-                                                                            addMessage={props.store.addMessage.bind(props.store)}
-                                                                            setMessageText={props.store.setMessageText.bind(props.store)}
+                                                                            dispatch={props.store.dispatch.bind(props.store)}
                             />}/>
                             <Route render={() => <NotFound/>}/>
                         </Switch>
