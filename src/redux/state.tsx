@@ -1,13 +1,8 @@
-/*let rerenderEntireTree = (state: dataType) => {
-    console.log(state)
-}*/
-const ADD_POST = 'ADD-POST'
-const SET_POST_TEXT = 'SET-POST-TEXT'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const SET_MESSAGE_TEXT = 'SET_MESSAGE-TEXT'
+import {profilePageActionType, profilePageReducer} from "./profilePageReducer";
+import {messagesPageActionType, messagesPageReducer} from "./messagesPageReducer";
 
 export type postsType = {
-    id: number
+    id: string
     message: string | undefined
     likesCount: number
 }
@@ -16,7 +11,7 @@ export type userNameType = {
     id: string
 }
 export type messagesType = {
-    id: number
+    id: string
     message: string | undefined
 }
 export type profilePageType = {
@@ -32,18 +27,17 @@ export type dataType = {
     profilePage: profilePageType
     messagesPage: messagesPageType
 }
-export type actionType = {
-    type: string
-    text?: string
-}
+export type actionType = profilePageActionType | messagesPageActionType
+
 export type storeType = {
     _state: dataType
+    _callSubscriber: (state: dataType) => void
+
 
     getState: () => dataType
     setState: (newState: { store: storeType }) => void
 
-    rerenderEntireTree: (state: dataType) => void
-    subscriber: (observer: (state: dataType) => void) => void
+    subscribe: (observer: (state: dataType) => void) => void
 
     dispatch: (action: actionType) => void
 }
@@ -53,9 +47,9 @@ const store: storeType = {
         profilePage: {
             postText: '',
             posts: [
-                {id: 1, message: 'Hello, word!', likesCount: 5},
-                {id: 2, message: 'How are your?', likesCount: 10},
-                {id: 3, message: 'Wonderful day', likesCount: 15},
+                {id: '1', message: 'Hello, word!', likesCount: 5},
+                {id: '2', message: 'How are your?', likesCount: 10},
+                {id: '3', message: 'Wonderful day', likesCount: 15},
             ],
         },
         messagesPage: {
@@ -67,9 +61,9 @@ const store: storeType = {
             ],
             messageText: '',
             messages: [
-                {id: 1, message: 'Hello!'},
-                {id: 2, message: 'How are you'},
-                {id: 3, message: 'My boss is jerk'},
+                {id: '1', message: 'Hello!'},
+                {id: '2', message: 'How are you'},
+                {id: '3', message: 'My boss is jerk'},
             ],
         }
     },
@@ -79,37 +73,17 @@ const store: storeType = {
     setState(newState: any) {
         this._state = newState
     },
-    rerenderEntireTree(state: dataType) {
+    _callSubscriber(state: dataType) {
         console.log(state)
     },
-    subscriber(observer: (state: dataType) => void) {
-        this.rerenderEntireTree = observer
+    subscribe(observer: (state: dataType) => void) {
+        this._callSubscriber = observer
     },
     dispatch(action: actionType) {
-        if (action.type === ADD_POST) {
-            this._state.profilePage.posts.push({id: 4, message: action.text, likesCount: 0})
-            this._state.profilePage.postText = ''
-            this.rerenderEntireTree(this._state)
-        } else if (action.type === ADD_MESSAGE) {
-            this._state.messagesPage.messages.push({id: 4, message: action.text})
-            this._state.messagesPage.messageText = ''
-            this.rerenderEntireTree(this._state)
-        } else if (action.type === SET_POST_TEXT) {
-            if (action.text) {
-                this._state.profilePage.postText = action.text
-                this.rerenderEntireTree(this._state)
-            }
-        } else if (action.type === SET_MESSAGE_TEXT) {
-            if (action.text) {
-                this._state.messagesPage.messageText = action.text
-                this.rerenderEntireTree(this._state)
-            }
-        }
+        this._state.profilePage = profilePageReducer(this._state.profilePage, action)
+        this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
+        this._callSubscriber(this._state)
     }
 }
-export const addPostAC = (text: string) => ({type: ADD_POST, text})
-export const setPostAC = (text: string) => ({type: SET_POST_TEXT, text})
-export const addMessageAC = (text: string) => ({type: ADD_MESSAGE, text})
-export const setMessageAC = (text: string) => ({type: SET_MESSAGE_TEXT, text})
 
 export default store

@@ -3,7 +3,7 @@ import post_avatar from "./../../../../media/post_avatar.png"
 import s from "./Post.module.css"
 
 type PostPropsType = {
-    id: number
+    id: string
     message: string | undefined
     likesCount: number
 }

@@ -13,4 +13,4 @@ export const rerenderEntireTree = (state: dataType) => {
     );
 }
 rerenderEntireTree(state)
-store.subscriber(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
