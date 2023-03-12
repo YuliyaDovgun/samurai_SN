@@ -15,9 +15,24 @@ export type setMessageTextActionType = {
 }
 export type messagesPageActionType = addMessageActionType | setMessageTextActionType | addPostActionType | setPostTextActionType
 
-export const messagesPageReducer = (state: messagesPageType, action: messagesPageActionType): messagesPageType => {
+const initState: messagesPageType = {
+    usersNames: [
+        {name: 'Sveta', id: '1'},
+        {name: 'Lena', id: '2'},
+        {name: 'Vika', id: '3'},
+        {name: 'Natasha', id: '4'},
+    ],
+    messageText: '',
+    messages: [
+        {id: '1', message: 'Hello!'},
+        {id: '2', message: 'How are you'},
+        {id: '3', message: 'My boss is jerk'},
+    ],
+}
+export const messagesPageReducer = (state = initState, action: messagesPageActionType): messagesPageType => {
     switch (action.type){
         case ADD_MESSAGE: {
+            state.messageText=''
             return {...state, messages: [{id: v1(), message: action.message}, ...state.messages]}
         }
         case SET_MESSAGE_TEXT: {

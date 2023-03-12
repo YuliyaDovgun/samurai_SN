@@ -15,9 +15,18 @@ export type setPostTextActionType = {
 }
 export type profilePageActionType = addPostActionType | setPostTextActionType | addMessageActionType | setMessageTextActionType
 
-export const profilePageReducer = (state: profilePageType, action: profilePageActionType): profilePageType => {
+const initState: profilePageType =  {
+    postText: '',
+        posts: [
+        {id: '1', message: 'Hello, word!', likesCount: 5},
+        {id: '2', message: 'How are your?', likesCount: 10},
+        {id: '3', message: 'Wonderful day', likesCount: 15},
+    ],
+}
+export const profilePageReducer = (state = initState, action: profilePageActionType): profilePageType => {
     switch (action.type){
         case ADD_POST: {
+            state.postText = ''
             return {...state, posts: [{id: v1(), message: action.message, likesCount: 0},...state.posts]}
         }
         case SET_POST_TEXT: {

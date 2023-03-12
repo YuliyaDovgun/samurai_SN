@@ -2,15 +2,18 @@ import React from 'react';
 import './index.css';
 import ReactDOM from "react-dom";
 import App from "./App";
-import store, {dataType} from "./redux/state";
+import store, {AppStateType} from './redux/store';
 
-const state = store.getState()
-export const rerenderEntireTree = (state: dataType) => {
-
+export const rerenderEntireTree = (state: AppStateType) => {
     ReactDOM.render(
-        <App store = {store}/>,
+        <App state={state} dispatch={store.dispatch.bind(store)}/>,
         document.getElementById('root')
     );
 }
-rerenderEntireTree(state)
-store.subscribe(rerenderEntireTree)
+
+rerenderEntireTree(store.getState())
+
+store.subscribe(() => {
+    const state: AppStateType = store.getState()
+    rerenderEntireTree(state)
+})

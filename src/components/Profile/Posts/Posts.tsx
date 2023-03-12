@@ -12,6 +12,7 @@ export function Posts(props: PostsPropsType) {
 
     const onClickHandler = () => {
         props.dispatch(addPostAC(props.profilePage.postText))
+        props.profilePage.postText = ''
     }
     const onChangePostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.dispatch(setPostTextAC(e.currentTarget.value))
