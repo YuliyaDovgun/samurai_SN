@@ -6,12 +6,11 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {AppStateType} from "./redux/store";
-import {actionType} from "./redux/state";
 
 type AppPropsType = {
     state: AppStateType
-    dispatch: (action: actionType) => void
 }
+
 function App(props: AppPropsType) {
     debugger
     return (
@@ -22,13 +21,8 @@ function App(props: AppPropsType) {
                     <Navbar/>
                     <div className={'content'}>
                         <Switch>
-                            <Route exact path={'/'} render={() => <Profile profilePage={props.state.profilePage}
-                                                                           dispatch={props.dispatch}
-                                                                           //dispatch={props.store.dispatch.bind(props.store)}
-                            />}/>
-                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={props.state.messagesPage}
-                                                                            dispatch={props.dispatch}
-                            />}/>
+                            <Route exact path={'/'} render={() => <Profile/>}/>
+                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={props.state.messagesPage}/>}/>
                             <Route render={() => <NotFound/>}/>
                         </Switch>
                     </div>

@@ -1,25 +1,27 @@
 import React from "react";
-import {actionType, messagesPageType} from "../../../redux/state";
 import {addMessageAC, setMessageTextAC} from "../../../redux/messagesPageReducer";
 import {Message} from "./Message";
+import {Context} from "../../../redux/Context";
 
-type MessagePropsType = {
-    messagesPage: messagesPageType
-    dispatch: (action: actionType) => void
-}
-
-export function MessageContainer(props: MessagePropsType) {
-
-    const onChangeMessageText = (messageText: string) => {
-        props.dispatch(setMessageTextAC(messageText))
+export function MessageContainer() {
+return <Context.Consumer>
+    {
+        (store) => {
+            const state = store.getState().messagesPage
+            const onChangeMessageText = (messageText: string) => {
+                store.dispatch(setMessageTextAC(messageText))
+            }
+            const onAddMessage = (messageText: string) => {
+                store.dispatch(addMessageAC(messageText))
+            }
+            return <Message
+                messages={state.messages}
+                messageText={state.messageText}
+                onChangeMessageText={onChangeMessageText}
+                onAddMessage={onAddMessage}
+            />
+        }
     }
-    const onAddMessage = (messageText: string) => {
-        props.dispatch(addMessageAC(messageText))
-    }
-    return <Message
-    messages={props.messagesPage.messages}
-    messageText={props.messagesPage.messageText}
-    onChangeMessageText={onChangeMessageText}
-    onAddMessage={onAddMessage}
-    />
+</Context.Consumer>
+
 }
