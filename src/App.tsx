@@ -5,14 +5,8 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {AppStateType} from "./redux/store";
 
-type AppPropsType = {
-    state: AppStateType
-}
-
-function App(props: AppPropsType) {
-    debugger
+function App() {
     return (
         <BrowserRouter>
             <div className={'App'}>
@@ -22,7 +16,7 @@ function App(props: AppPropsType) {
                     <div className={'content'}>
                         <Switch>
                             <Route exact path={'/'} render={() => <Profile/>}/>
-                            <Route path={'/dialogs'} render={() => <Dialogs messagesPage={props.state.messagesPage}/>}/>
+                            <Route path={'/dialogs'} render={() => <Dialogs/>}/>
                             <Route render={() => <NotFound/>}/>
                         </Switch>
                     </div>

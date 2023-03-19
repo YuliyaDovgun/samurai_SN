@@ -1,3 +1,4 @@
+/*
 import React, {createContext} from "react";
 import {storeType} from "./state";
 
@@ -8,3 +9,4 @@ export const Provider = (props: any) => {
         {props.children}
     </Context.Provider>
 }
+*/
