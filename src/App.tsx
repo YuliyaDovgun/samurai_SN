@@ -5,6 +5,7 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import { UsersContainer } from './components/Users/UsersContainer';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                         <Switch>
                             <Route exact path={'/'} render={() => <Profile/>}/>
                             <Route path={'/dialogs'} render={() => <Dialogs/>}/>
+                            <Route path={'/users'} render={() => <UsersContainer/>}/>
                             <Route render={() => <NotFound/>}/>
                         </Switch>
                     </div>

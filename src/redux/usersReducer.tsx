@@ -27,31 +27,7 @@ type setUsersActionType = {
     type: "SET_USERS"
     users: userType[]
 }
-const initState: userType[] =  [
-        {
-            id: v1(),
-            photo: "",
-            followed: true,
-            fullName: "Yuliya Dovgun",
-            status: "I'm frontend developer",
-            address: {country: "Belarus", city: "Minsk"}
-        },
-        {
-            id: v1(),
-            photo: "",
-            followed: false,
-            fullName: "Super model",
-            status: "I'm super-puper from Paris",
-            address: {country: "Belarus", city: "Paris"}
-        },
-        {
-            id: v1(),
-            photo: "",
-            followed: true,
-            fullName: "AKA_48",
-            status: "777",
-            address: {country: "Russia", city: "Moscow"}
-        }]
+const initState: userType[] =  []
 
 type usersActionType = followActionType | unFollowActionType | setUsersActionType
 export const usersReducer = (state = initState, action: usersActionType): userType[] => {
