@@ -39,6 +39,6 @@ export const Users: React.FC<UsersPropsType> = ({users, follow, unFollow, setUse
             }])
     }
     return <div>
-        {users.map(u => <User user={u} follow={follow} unFollow={unFollow}/>)}
+        {users.map(u => <User key={u.id} user={u} follow={follow} unFollow={unFollow}/>)}
     </div>
 }

@@ -1,0 +1,28 @@
+.userContainer {
+    display: flex;
+}
+.imgBtnContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+.imgBtnContainer img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    margin-bottom: 5px;
+
+}
+.imgBtnContainer button {
+    width: 70px;
+    height: 20px;
+}
+.infoContainer {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
