@@ -1,27 +1,25 @@
-import {v1} from "uuid";
-
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
-export type userType = {
-    id: string,
-    photo: string
-    followed: boolean,
-    fullName: string,
-    status: string,
-    address: {
-        country: string
-        city: string
-    }
+export type userType =  {
+    name: string
+    id: number | string
+    uniqueUrlName?: string
+    photos: {
+        small?: string
+        large?: string
+    },
+    status?: string
+    followed: boolean
 }
 
 type followActionType = {
     type: "FOLLOW"
-    userId: string
+    userId: number | string
 }
 type unFollowActionType = {
     type: "UNFOLLOW"
-    userId: string
+    userId: number | string
 }
 type setUsersActionType = {
     type: "SET_USERS"
@@ -44,10 +42,10 @@ export const usersReducer = (state = initState, action: usersActionType): userTy
     }
     return state
 }
-export const followAC = (userId: string): followActionType => ({
+export const followAC = (userId: number | string): followActionType => ({
     type: FOLLOW, userId
 })
-export const unFollowAC = (userId: string): unFollowActionType => ({
+export const unFollowAC = (userId: number | string): unFollowActionType => ({
     type: UNFOLLOW, userId
 })
 export const setUsersAC = (users: userType[]): setUsersActionType => ({

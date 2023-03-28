@@ -4,20 +4,26 @@ let state: userType[]
     beforeEach(() => {
         state = [
             {
+                name: "Yuliya Dovgun",
                 id: "1",
-                photo: "",
-                followed: true,
-                fullName: "Yuliya Dovgun",
+                uniqueUrlName: "",
+                photos: {
+                    small: "smallPhotos_u1",
+                    large: "",
+                },
                 status: "I'm frontend developer",
-                address: {country: "Belarus", city: "Minsk"}
+                followed: true
             },
             {
+                name: "Super model",
                 id: "2",
-                photo: "",
-                followed: false,
-                fullName: "Super model",
+                uniqueUrlName: "",
+                photos: {
+                    small: "smallPhotos_u2",
+                    large: "",
+                },
                 status: "I'm super-puper from Paris",
-                address: {country: "Belarus", city: "Paris"}
+                followed: false
             },]
     })
 

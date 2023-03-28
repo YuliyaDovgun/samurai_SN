@@ -1,11 +1,12 @@
 import React, {FC} from "react";
 import {userType} from "../../redux/usersReducer";
 import s from "./User.module.css"
+import avatar from "../../media/avatar.jpg"
 
 type UserPropsType = {
     user: userType
-    follow: (userId: string) => void
-    unFollow: (userId: string) => void
+    follow: (userId: number | string) => void
+    unFollow: (userId: number | string) => void
 }
 
 export const User: FC<UserPropsType> = ({user, follow, unFollow}) => {
@@ -17,15 +18,15 @@ export const User: FC<UserPropsType> = ({user, follow, unFollow}) => {
     }
     return <div className={s.userContainer}>
         <div className={s.imgBtnContainer}>
-            <img src={user.photo} alt={'avatar'}/>
+            <img src={user.photos.small ? user.photos.small : avatar} alt={'avatar'}/>
             {user.followed
                 ? <button onClick={unFollowBtnHandler}>unFollow</button>
                 : <button onClick={followBtnHandler}>follow</button>}
         </div>
         <div className={s.infoContainer}>
             <div>
-                <span>{user.fullName}</span>
-                <span>{user.address.country + ", " + user.address.city}</span>
+                <span>{user.name}</span>
+                <span>{" user.address.country" + ", " + "user.address.city"}</span>
             </div>
             <div>
                 {user.status}
