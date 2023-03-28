@@ -9,12 +9,19 @@ type UsersPropsType = {
     unFollow: (userId: number | string) => void
     setUsers: (users: userType[]) => void
 }
-export const Users: React.FC<UsersPropsType> = ({users, follow, unFollow, setUsers}) => {
-    if (users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response =>
-        setUsers(response.data.items))
+
+export class Users extends React.Component<UsersPropsType> {
+    constructor(props: UsersPropsType) {
+        super(props);
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => this.props.setUsers(response.data.items))
     }
-    return <div>
-        {users.map(u => <User key={u.id} user={u} follow={follow} unFollow={unFollow}/>)}
-    </div>
+
+    render() {
+        return <div>
+            {this.props.users.map(u => <User key={u.id} user={u} follow={this.props.follow}
+                                             unFollow={this.props.unFollow}/>)}
+        </div>
+    }
 }
