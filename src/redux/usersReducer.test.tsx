@@ -1,4 +1,5 @@
 import {
+    changeIsFetchingAC,
     followAC,
     initStateType,
     setCurrentPageAC,
@@ -36,7 +37,8 @@ let state: initStateType
                 },],
             page: 1,
             totalCount: 0,
-            countOnThePage: 5
+            countOnThePage: 5,
+            isFetching: false
         }
     })
 
@@ -68,4 +70,9 @@ test('set totalCount users', () => {
     let newState = usersReducer(state, setTotalCountUsersAC(21))
 
     expect(newState.totalCount).toBe(21)
+})
+test('change isFetching', () => {
+    let newState = usersReducer(state, changeIsFetchingAC(true))
+
+    expect(newState.isFetching).toBe(true)
 })
