@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import {userType} from "../../redux/usersReducer";
 import s from "./User.module.css"
 import avatar from "../../media/avatar.jpg"
+import {NavLink} from "react-router-dom";
 
 type UserPropsType = {
     user: userType
@@ -18,7 +19,7 @@ export const User: FC<UserPropsType> = ({user, follow, unFollow}) => {
     }
     return <div className={s.userContainer}>
         <div className={s.imgBtnContainer}>
-            <img src={user.photos.small ? user.photos.small : avatar} alt={'avatar'}/>
+            <NavLink to={'/profile/' + user.id}><img src={user.photos.small ? user.photos.small : avatar} alt={'avatar'}/></NavLink>
             {user.followed
                 ? <button onClick={unFollowBtnHandler}>unFollow</button>
                 : <button onClick={followBtnHandler}>follow</button>}

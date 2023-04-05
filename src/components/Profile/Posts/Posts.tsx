@@ -11,7 +11,7 @@ type PostsPropsType = {
 
 export function Posts(props: PostsPropsType) {
     const postsElement = props.posts.map(p =>
-        <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+        <Post id={p.id} key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const addPostHandler = () => {
         props.onAddPostHandler(props.postText)

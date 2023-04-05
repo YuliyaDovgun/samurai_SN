@@ -1,5 +1,5 @@
-import {profilePageActionType, profilePageReducer} from "./profilePageReducer";
-import {messagesPageActionType, messagesPageReducer} from "./messagesPageReducer";
+import {profilePageActionType} from "./profilePageReducer";
+import {messagesPageActionType} from "./messagesPageReducer";
 
 export type postsType = {
     id: string
@@ -80,8 +80,6 @@ const store: storeType = {
         this._callSubscriber = observer
     },
     dispatch(action: actionType) {
-        this._state.profilePage = profilePageReducer(this._state.profilePage, action)
-        this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
         this._callSubscriber(this._state)
     }
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import {Profile} from "./components/Profile/Profile";
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 function App() {
     return (
@@ -16,7 +16,7 @@ function App() {
                     <Navbar/>
                     <div className={'content'}>
                         <Switch>
-                            <Route exact path={'/'} render={() => <Profile/>}/>
+                            <Route path={'/profile'} render={() => <ProfileContainer/>}/>
                             <Route path={'/dialogs'} render={() => <Dialogs/>}/>
                             <Route path={'/users'} render={() => <UsersContainer/>}/>
                             <Route render={() => <NotFound/>}/>
