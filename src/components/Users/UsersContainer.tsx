@@ -38,7 +38,7 @@ type UsersContainerPropsType = mapStateToPropsUsersType & mapDispatchToPropsUser
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.changeIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.countOnThePage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.countOnThePage}`, {withCredentials: true})
             .then(response => {
                 this.props.changeIsFetching(false)
                 this.props.setUsers(response.data.items)
@@ -49,7 +49,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     getPageOnClickHandler = (currentPage: number) => {
         this.props.changeIsFetching(true)
         this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.countOnThePage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.countOnThePage}`, {withCredentials: true})
             .then(response => {
                 this.props.changeIsFetching(false)
                 this.props.setUsers(response.data.items)

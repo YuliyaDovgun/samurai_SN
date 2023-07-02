@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersApi} from "../api/users-api";
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
@@ -6,7 +9,7 @@ const SET_TOTAL_COUNT_USERS = "SET_TOTAL_COUNT_USERS"
 const IS_FETCHING = "IS_FETCHING"
 export type userType =  {
     name: string
-    id: number | string
+    id: string
     uniqueUrlName?: string
     photos: {
         small?: string
@@ -18,11 +21,11 @@ export type userType =  {
 
 type followActionType = {
     type: "FOLLOW"
-    userId: number | string
+    userId: string
 }
 type unFollowActionType = {
     type: "UNFOLLOW"
-    userId: number | string
+    userId: string
 }
 type setUsersActionType = {
     type: "SET_USERS"
@@ -80,10 +83,10 @@ export const usersReducer = (state: initStateType = initState, action: usersActi
     }
     return state
 }
-export const followAC = (userId: number | string): followActionType => ({
+export const followAC = (userId: string): followActionType => ({
     type: FOLLOW, userId
 })
-export const unFollowAC = (userId: number | string): unFollowActionType => ({
+export const unFollowAC = (userId: string): unFollowActionType => ({
     type: UNFOLLOW, userId
 })
 export const setUsersAC = (users: userType[]): setUsersActionType => ({
@@ -98,3 +101,11 @@ export const setTotalCountUsersAC = (totalCount: number): setTotalCountUsersActi
 export const changeIsFetchingAC = (isFetching: boolean): changeIsFetchingActionType => ({
     type: IS_FETCHING, isFetching
 })
+export const followTC = (userId: string) => (dispatch: Dispatch) => {
+    usersApi.follow(userId)
+        .then(res => dispatch(followAC(userId)))
+}
+export const unFollowTC = (userId: string) => (dispatch: Dispatch) => {
+    usersApi.unFollow(userId)
+        .then(res => dispatch(unFollowAC(userId)))
+}

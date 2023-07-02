@@ -8,8 +8,8 @@ type UsersPropsType = {
     getPageOnClickHandler: (currentPage: number) => void
     page: number
     users: userType[]
-    follow: (userId: number | string) => void
-    unFollow: (userId: number | string) => void
+    follow: (userId: string) => void
+    unFollow: (userId: string) => void
 }
 export const Users = (props: UsersPropsType) => {
     return <div>
