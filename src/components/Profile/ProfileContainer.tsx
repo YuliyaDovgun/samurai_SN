@@ -6,7 +6,7 @@ import {AppStateType} from "../../redux/store";
 import {setProfileInfo} from "../../redux/profilePageReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
-type mathParamType = {
+export type mathParamType = {
     userId?: string
 }
 type mapStatePropsType = ReturnType<typeof mapStateToProps>
