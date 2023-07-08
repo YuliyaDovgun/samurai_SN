@@ -1,5 +1,6 @@
 import {
-    changeIsFetchingAC,
+    appStatusType,
+    changeIsFetchingAC, changeUserEntityStatusAC,
     followAC,
     initStateType,
     setCurrentPageAC,
@@ -22,7 +23,8 @@ let state: initStateType
                         large: "",
                     },
                     status: "I'm frontend developer",
-                    followed: true
+                    followed: true,
+                    userEntityStatus: 'idle',
                 },
                 {
                     name: "Super model",
@@ -33,12 +35,13 @@ let state: initStateType
                         large: "",
                     },
                     status: "I'm super-puper from Paris",
-                    followed: false
+                    followed: false,
+                    userEntityStatus: 'idle',
                 },],
             page: 1,
             totalCount: 0,
             countOnThePage: 5,
-            isFetching: false
+            isFetching: false,
         }
     })
 
@@ -75,4 +78,12 @@ test('change isFetching', () => {
     let newState = usersReducer(state, changeIsFetchingAC(true))
 
     expect(newState.isFetching).toBe(true)
+})
+test('userEntityStatus should be changed', () => {
+
+    let newUserEntityStatus: appStatusType = 'success'
+
+    let newState = usersReducer(state, changeUserEntityStatusAC('2', newUserEntityStatus))
+
+    expect(newState.users[1].userEntityStatus).toBe('success')
 })

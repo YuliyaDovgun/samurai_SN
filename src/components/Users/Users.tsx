@@ -1,13 +1,13 @@
 import React from "react";
 import {User} from "./User";
 import {Paginator} from "../common/Paginator";
-import {userType} from "../../redux/usersReducer";
+import {userDomainType} from "../../redux/usersReducer";
 
 type UsersPropsType = {
     countOfThePage: number
     getPageOnClickHandler: (currentPage: number) => void
     page: number
-    users: userType[]
+    users: userDomainType[]
     follow: (userId: string) => void
     unFollow: (userId: string) => void
 }

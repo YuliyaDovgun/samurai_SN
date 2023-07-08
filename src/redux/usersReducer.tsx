@@ -18,6 +18,7 @@ export type userType =  {
     status?: string
     followed: boolean
 }
+export type userDomainType = userType & {userEntityStatus : appStatusType}
 
 type followActionType = {
     type: "FOLLOW"
@@ -43,24 +44,21 @@ type changeIsFetchingActionType = {
     type: "IS_FETCHING"
     isFetching: boolean
 }
-export type initStateType = {
-    users: userType[]
-    page: number
-    totalCount: number
-    countOnThePage: number
-    isFetching: boolean
-}
-const initState: initStateType = {
-    users: [],
+type changeStatusActionType = ReturnType<typeof changeUserEntityStatusAC>
+export type initStateType = typeof initState
+const initState = {
+    users: [] as userDomainType[],
     page: 1,
     totalCount: 0,
     countOnThePage: 5,
-    isFetching: false
+    isFetching: false,
 }
+export type appStatusType = 'idle' | 'success' | 'failed' | 'loading'
 
 type usersActionType = followActionType | unFollowActionType | setUsersActionType
 | setCurrentPageActionType | setTotalCountUsersActionType | changeIsFetchingActionType
-export const usersReducer = (state: initStateType = initState, action: usersActionType): initStateType => {
+| changeStatusActionType
+export const usersReducer = (state = initState, action: usersActionType): initStateType => {
     switch (action.type){
         case FOLLOW: {
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
@@ -69,7 +67,7 @@ export const usersReducer = (state: initStateType = initState, action: usersActi
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         }
         case SET_USERS: {
-            return {...state, users: [...action.users]}
+            return {...state, users: action.users.map(u => ({...u, userEntityStatus: 'idle'}))}
         }
         case SET_CURRENT_PAGE: {
             return {...state, page: action.currentPage}
@@ -79,6 +77,9 @@ export const usersReducer = (state: initStateType = initState, action: usersActi
         }
         case IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
+        }
+        case "USERS/CHANGE-STATUS": {
+            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, userEntityStatus: action.userEntityStatus} : u)}
         }
     }
     return state
@@ -101,11 +102,31 @@ export const setTotalCountUsersAC = (totalCount: number): setTotalCountUsersActi
 export const changeIsFetchingAC = (isFetching: boolean): changeIsFetchingActionType => ({
     type: IS_FETCHING, isFetching
 })
+export const changeUserEntityStatusAC = (userId: string, userEntityStatus: appStatusType) => ({
+    type: 'USERS/CHANGE-STATUS', userId, userEntityStatus
+} as const)
+
 export const followTC = (userId: string) => (dispatch: Dispatch) => {
+    dispatch(changeUserEntityStatusAC(userId, 'loading'))
     usersApi.follow(userId)
-        .then(res => dispatch(followAC(userId)))
+        .then(res => {
+            if(res.resultCode === 0) {
+                dispatch(changeUserEntityStatusAC(userId,'success'))
+                dispatch(followAC(userId))
+            } else {
+                dispatch(changeUserEntityStatusAC(userId,'failed'))
+            }
+        })
 }
 export const unFollowTC = (userId: string) => (dispatch: Dispatch) => {
+    dispatch(changeUserEntityStatusAC(userId,'loading'))
     usersApi.unFollow(userId)
-        .then(res => dispatch(unFollowAC(userId)))
+        .then(res => {
+            if(res.resultCode === 0) {
+                dispatch(changeUserEntityStatusAC(userId,'success'))
+                dispatch(unFollowAC(userId))
+            } else {
+                dispatch(changeUserEntityStatusAC(userId, 'failed'))
+            }
+        })
 }

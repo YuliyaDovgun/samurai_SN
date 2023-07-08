@@ -3,6 +3,7 @@ import {instance} from "./instance";
 export const authAPI = {
     getMe: () => {
         return instance.get<authRT<{data: authUserRT}>>('auth/me')
+            .then(res => res.data)
     }
 }
 export type authUserRT = {
