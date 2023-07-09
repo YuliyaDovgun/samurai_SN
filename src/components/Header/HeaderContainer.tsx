@@ -1,8 +1,8 @@
 import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {AppDispatch, AppStateType} from "../../redux/store";
-import {fetchAuthMeTC, setAuthAC, setIsAuthAC} from "../../redux/authReducer";
+import {AppStateType} from "../../redux/store";
+import {fetchAuthMeTC} from "../../redux/authReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {mathParamType} from "../Profile/ProfileContainer";
 
@@ -19,18 +19,17 @@ const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth
 })
 
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-    setAuthAC,
-    setIsAuthAC,
+const mapDispatchToProps = {
     fetchAuthMeTC,
-})
+}
 
 const WithRouterHeaderContainer = withRouter(HeaderContainer)
 
+//@ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps)(WithRouterHeaderContainer)
 
 // types
 type PropsType = RouteComponentProps<mathParamType> & HeaderContainerPropsType
 type HeaderContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 type mapStateToPropsType = ReturnType<typeof mapStateToProps>
-type mapDispatchToPropsType = ReturnType<typeof mapDispatchToProps>
+type mapDispatchToPropsType = typeof mapDispatchToProps

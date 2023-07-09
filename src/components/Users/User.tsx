@@ -1,9 +1,8 @@
 import React, {FC} from "react";
-import {followTC, unFollowTC, userDomainType} from "../../redux/usersReducer";
+import {userDomainType} from "../../redux/usersReducer";
 import s from "./User.module.css"
 import avatar from "../../media/avatar.jpg"
 import {NavLink} from "react-router-dom";
-import {useDispatch} from "react-redux";
 
 type UserPropsType = {
     user: userDomainType
@@ -11,13 +10,12 @@ type UserPropsType = {
     unFollow: (userId: string) => void
 }
 
-export const User: FC<UserPropsType> = ({user}) => {
-    const dispatch = useDispatch()
+export const User: FC<UserPropsType> = ({user, follow, unFollow}) => {
     const followBtnHandler = (userId: string) => {
-        dispatch(followTC(userId))
+        follow(userId)
     }
     const unFollowBtnHandler = (userId: string) => {
-       dispatch(unFollowTC(userId))
+       unFollow(userId)
     }
     return <div className={s.userContainer}>
         <div className={s.imgBtnContainer}>

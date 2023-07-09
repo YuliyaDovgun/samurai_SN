@@ -1,59 +1,20 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
-import {
-    changeIsFetchingAC,
-    followAC,
-    setCurrentPageAC,
-    setTotalCountUsersAC,
-    setUsersAC,
-    unFollowAC
-} from "../../redux/usersReducer";
+import {fetchUsersTC, followTC, setCurrentPageAC, unFollowTC} from "../../redux/usersReducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {usersApi} from "../../api/users-api";
-
-export type mapStateToPropsUsersType = ReturnType<typeof mapStateToProps>
-export type mapDispatchToPropsUsersType = typeof mapDispatchToProps
-
-const mapStateToProps = (state: AppStateType) => {
-    return {
-        users: state.users.users,
-        page: state.users.page,
-        totalCount: state.users.totalCount,
-        countOnThePage: state.users.countOnThePage,
-        isFetching: state.users.isFetching,
-    }
-}
-const mapDispatchToProps = {
-    follow: followAC,
-    unFollow: unFollowAC,
-    setUsers: setUsersAC,
-    setCurrentPage: setCurrentPageAC,
-    setTotalCountUsersAC: setTotalCountUsersAC,
-    changeIsFetching: changeIsFetchingAC,
-}
-type UsersContainerPropsType = mapStateToPropsUsersType & mapDispatchToPropsUsersType
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {mathParamType} from "../Profile/ProfileContainer";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.changeIsFetching(true)
-        usersApi.getUsers(this.props.page, this.props.countOnThePage)
-            .then(response => {
-                this.props.changeIsFetching(false)
-                this.props.setUsers(response.items)
-                this.props.setTotalCountUsersAC(response.totalCount)
-            })
+       this.props.fetchUsersTC(this.props.page, this.props.countOnThePage)
     }
 
     getPageOnClickHandler = (currentPage: number) => {
-        this.props.changeIsFetching(true)
         this.props.setCurrentPage(currentPage)
-        usersApi.getUsers(this.props.page, this.props.countOnThePage)
-            .then(response => {
-                this.props.changeIsFetching(false)
-                this.props.setUsers(response.items)
-            })
+        this.props.fetchUsersTC(currentPage, this.props.countOnThePage)
     }
 
     render() {
@@ -72,6 +33,28 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
         </>
     }
 }
+const mapStateToProps = (state: AppStateType) => {
+    return {
+        users: state.users.users,
+        page: state.users.page,
+        totalCount: state.users.totalCount,
+        countOnThePage: state.users.countOnThePage,
+        isFetching: state.users.isFetching,
+    }
+}
+const mapDispatchToProps = {
+    follow: followTC,
+    unFollow: unFollowTC,
+    setCurrentPage: setCurrentPageAC,
+    fetchUsersTC,
+}
+const UsersContainerWithRouter = withRouter(UsersContainer)
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainerWithRouter)
+
+type UsersContainerPropsType = RouteComponentProps<mathParamType> & mapStateToPropsUsersType & mapDispatchToPropsUsersType
+export type mapStateToPropsUsersType = ReturnType<typeof mapStateToProps>
+export type mapDispatchToPropsUsersType = typeof mapDispatchToProps
+
 

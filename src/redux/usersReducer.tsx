@@ -81,6 +81,16 @@ export const unFollowTC = (userId: string) => (dispatch: Dispatch) => {
             }
         })
 }
+export const fetchUsersTC = (page: number, countOnThePage: number) => (dispatch: Dispatch) => {
+    dispatch(changeIsFetchingAC(true))
+    usersApi.getUsers(page, countOnThePage)
+        .then(response => {
+            dispatch(changeIsFetchingAC(false))
+            dispatch(setUsersAC(response.items))
+            dispatch(setTotalCountUsersAC(response.totalCount))
+        })
+}
+
 export type appStatusType = 'idle' | 'success' | 'failed' | 'loading'
 export type initStateType = typeof initState
 export type userType =  {
