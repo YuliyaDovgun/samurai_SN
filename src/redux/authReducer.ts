@@ -1,4 +1,5 @@
-import {authUserRT} from "../api/auth-api";
+import {authAPI, authUserRT} from "../api/auth-api";
+import {Dispatch} from "redux";
 
 const initState: authInitState = {
     id: null,
@@ -20,6 +21,16 @@ export const authReducer = (state: authInitState = initState, action: authAction
 }
 export const setAuthAC = (authData: authUserRT) => ({type: 'SET-AUTH', authData} as const)
 export const setIsAuthAC = (isAuth: boolean) => ({type: 'SET-IS-AUTH', isAuth} as const)
+
+export const fetchAuthMeTC = () => (dispatch: Dispatch) => {
+    authAPI.getMe()
+        .then(res => {
+            if (res.resultCode === 0) {
+                dispatch(setAuthAC(res.data.data))
+                dispatch(setIsAuthAC(true))
+            }
+        })
+}
 
 type authInitState = {
     id: number | null
