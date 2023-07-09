@@ -1,5 +1,7 @@
 import {v1} from "uuid";
 import {addMessageActionType, setMessageTextActionType} from "./messagesPageReducer";
+import {Dispatch} from "redux";
+import {usersApi} from "../api/users-api";
 
 const initState: initStateType = {
     postText: '',
@@ -10,6 +12,7 @@ const initState: initStateType = {
     ],
     profileInfo: null
 }
+
 export const profilePageReducer = (state = initState, action: profilePageActionType): initStateType => {
     switch (action.type) {
         case 'PROFILE/ADD_POST': {
@@ -26,15 +29,23 @@ export const profilePageReducer = (state = initState, action: profilePageActionT
             return state
     }
 }
+
 export const addPostAC = (message: string) => ({
     type: 'PROFILE/ADD_POST', message
-}as const)
+} as const)
 export const setPostTextAC = (message: string) => ({
     type: 'PROFILE/SET_POST_TEXT', message
-}as const)
+} as const)
 export const setProfileInfo = (profileInfo: profileInfoType) => ({
     type: 'PROFILE/SET_PROFILE_INFO', profileInfo
-}as const)
+} as const)
+
+export const fetchProfileInfoTC = (userId: string) => (dispatch: Dispatch) => {
+    usersApi.getProfileInfo(userId)
+        .then(response => {
+            dispatch(setProfileInfo(response))
+        })
+}
 
 type postType = {
     id: string

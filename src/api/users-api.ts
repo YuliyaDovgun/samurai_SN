@@ -5,7 +5,10 @@ export const usersApi = {
         return instance.get(`/users?page=${page}&count=${countOnThePage}`)
             .then(res => res.data)
     },
-
+    getProfileInfo: (userId: string) => {
+        return instance.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
+            .then(res => res.data)
+    },
     follow: (userId: string) => {
         return instance.post<followRT>(`/follow/${userId}`)
             .then(res => res.data)
