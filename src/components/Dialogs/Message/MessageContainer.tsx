@@ -4,6 +4,7 @@ import {Message} from "./Message";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/store";
 import {Dispatch} from "redux";
+import {WithAuthRedirect} from "../../../hoc/WithAuthRedirect";
 
 const mapStateToProps = (state: AppStateType) => {
     return {
@@ -17,4 +18,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         onAddMessage: (messageText: string) => dispatch(addMessageAC(messageText))
     }
 }
-export const MessageContainer = connect(mapStateToProps, mapDispatchToProps)(Message)
+export const MessageContainer = connect(mapStateToProps, mapDispatchToProps)(WithAuthRedirect(Message))
