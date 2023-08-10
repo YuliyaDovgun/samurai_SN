@@ -6,6 +6,7 @@ import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {mathParamType} from "../Profile/ProfileContainer";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
@@ -48,10 +49,10 @@ const mapDispatchToProps = {
     setCurrentPage: setCurrentPageAC,
     fetchUsersTC,
 }
-const UsersContainerWithRouter = withRouter(UsersContainer)
 
-//@ts-ignore
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainerWithRouter)
+export default compose<React.ComponentType>(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps))(UsersContainer)
 
 type UsersContainerPropsType = RouteComponentProps<mathParamType> & mapStateToPropsUsersType & mapDispatchToPropsUsersType
 export type mapStateToPropsUsersType = ReturnType<typeof mapStateToProps>

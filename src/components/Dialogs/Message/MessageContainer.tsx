@@ -3,7 +3,7 @@ import {addMessageAC, setMessageTextAC} from "../../../redux/messagesPageReducer
 import {Message} from "./Message";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {WithAuthRedirect} from "../../../hoc/WithAuthRedirect";
 
 const mapStateToProps = (state: AppStateType) => {
@@ -18,4 +18,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         onAddMessage: (messageText: string) => dispatch(addMessageAC(messageText))
     }
 }
-export const MessageContainer = connect(mapStateToProps, mapDispatchToProps)(WithAuthRedirect(Message))
+export const MessageContainer = compose<React.ComponentType>(
+    WithAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps)
+    )(Message)
